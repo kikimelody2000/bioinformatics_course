@@ -1,4 +1,4 @@
-!/usr/bin/env bash
+#!/usr/bin/env bash
 mkdir -p analysis docs data
 
 for my_directory in scripts analysis docs data;do
