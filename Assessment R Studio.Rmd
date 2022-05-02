@@ -1,0 +1,93 @@
+---
+title: "Advanced Bioinformatics 2022 Assessment"
+author: "Zena 9734"
+date: '2022-04-12'
+output: html_document
+---
+
+
+## Task 3.1
+```{r}
+sum(5:55)
+```
+
+## Task 3.2
+```{r}
+sumfun <- function(n) {
+  ans <- sum(5:n)
+  return(ans)
+}
+sumfun(10)
+sumfun(20)
+sumfun(100)
+```
+
+
+## Task 3.3
+```{r}
+fibonacci = c()
+fibonacci[1] = fibonacci[2] = 1
+for(i in 3:12){fibonacci[i]=fibonacci[i-2]+fibonacci[i-1]}
+fibonacci
+```
+
+
+## Task 3.4 
+```{r}
+library(ggplot2)
+ggplot(data=mtcars,aes(x=gear,y=mpg))+geom_boxplot(aes(col=as.factor(gear)))
+```
+
+
+## Task 3.5
+
+```{r}
+task<-lm(dist ~ speed, data = cars)
+summary(task)
+
+plot(dist ~ speed, data = cars, ylab = "Stopping Distance Ft", xlab = "Speed of Car mph", main = "The Relationship of Stopping Distance and Speed of Car")
+abline(task)
+
+```
+
+
+Units were found using > ?cars
+
+Speed mph 
+
+Stopping distance ft 
+
+Slope = 3.93ft (SE 0.4155) - this means that the the distance increases by 3.93ft for every mph
+
+Intercept -17.58 (SE 6.7584) - this means that when the car is moving at 0mph, the stopping distance is -17.58ft. This is not possible
+
+
+## Task 3.6
+```{r}
+ggplot(cars,aes(speed,dist))+geom_point()+geom_smooth(method="lm",formula="y~x")+ggtitle("The Relationship of Stopping Distance and Speed of Car")+xlab("Speed of car mph")+ylab("Stopping distance ft")
+```
+
+
+## Task 3.7
+
+```{r}
+speedsq <- cars$speed^2
+distm <- cars$dist*0.000189394 #convert the distance from feet to miles and assign to variable distm
+task2<-lm(distm ~ speedsq, data=cars) #assign the linear model to task2
+summary(task2) #provide summary of linear model
+
+plot(distm ~ speedsq, data = cars, ylab = "Stopping Distance miles", xlab = "Square of Speed of Car mph", main = "The Relationship of Stopping Distance and Speed of Car")
+abline(task2)
+```
+
+
+```{r}
+#Time = distance/speed. Therefore the slope gives the time. I need to convert the reaction time into seconds. 1 hour = 3600 seconds
+reactiontime <- 2.443e-05*3600
+reactiontime #this seems very quick to be a realistic reaction time. 
+```
+
+```{r}
+ggplot(cars,aes(speedsq,dist))+geom_point()+geom_smooth(method="lm",formula="y~speedsq")+ggtitle("The Relationship of Stopping Distance and Speed of Car")+xlab("Speed of car mph")+ylab("Stopping distance ft")
+```
+
